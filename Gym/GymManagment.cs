@@ -142,7 +142,7 @@ namespace Gym
             double burntColories = 0.0;
             foreach (var item in athleteExerciseList)
             {
-                if (item.Status!=null && item.Status.Equals(Status.ENDED) && item.NameAthlete.Equals(nameAthlete))
+                if (item.Status != null && item.Status.Equals(Status.ENDED) && item.NameAthlete.Equals(nameAthlete))
                 {
                     burntColories += item.getColoriesBurnt();
                 }
@@ -152,29 +152,63 @@ namespace Gym
 
         public double caloriesTarget(string nameAthlete)
         {
-            double burntColories = 0.0;
+            double colories = 0.0;
             foreach (var item in athleteExerciseList)
             {
-                if (item!=null && item.NameAthlete.Equals(nameAthlete))
+                if (item != null && item.NameAthlete.Equals(nameAthlete))
                 {
-                    burntColories += item.getColoriesBurnt();
+                    colories += item.getColoriesBurnt();
                 }
             }
-            return burntColories;
+            return colories;
         }
 
         public string score(string nameAthlete)
         {
+            double calorB = caloriesBurnt(nameAthlete);
+            double calorT = caloriesTarget(nameAthlete);
+
+            if (calorB / calorT >= 1)
+            {
+                return "Goog";
+            }
+            else if (calorB / calorT >= 0.8 && calorB / calorT <= 1)
+            {
+                return "Average";
+            }
+            else if (calorB / calorT <= 0.8)
+            {
+                return "Bad";
+            }
             return null;
         }
 
+
         public string worstExercise(string nameAthlete)
         {
+            double diff = 0.0;
+
+            foreach (var athlete in athleteExerciseList)
+            {
+                bool atColors = true;
+                if (athlete != null && athlete.NameAthlete.Equals(nameAthlete))
+                {
+                  if(atColors)
+                    {
+                        diff = athlete.getColoriesBurnt();
+                        atColors = false;
+                    }else if (diff > athlete.getColoriesBurnt())
+                    {
+                        diff=athlete.getColoriesBurnt();
+                    }
+                }
+            }
             return null;
         }
 
         public string bestExercise(string nameAthlete)
         {
+
             return null;
         }
 
@@ -185,7 +219,9 @@ namespace Gym
 
         public string exercisesByExecutionOrder(string nameAthlete)
         {
+
             return null;
         }
     }
+}
 }
