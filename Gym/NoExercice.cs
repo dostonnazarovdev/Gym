@@ -8,5 +8,11 @@ namespace Gym
 {
     public class NoExercice : Exception
     {
+
+        public NoExercice(string exercice) 
+            : base(exercice) 
+        {
+
+        }
     }
 }

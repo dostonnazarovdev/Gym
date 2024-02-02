@@ -74,6 +74,18 @@ namespace Gym
             return null;
         }
 
+        public string getExercise(string name)
+        {
+            foreach (var item in exerciceList)
+            {
+                if (item != null && item.Name.Equals(name))
+                {
+                    return item.Name + " " + item.Coefficient;
+                }
+            }
+            throw new NoExercice("Where is Exercise?");
+        }
+
         public void addExerciseToProgram(string nameAthlete, string nameExercise, int series,
                                          int repetitions, double weight)
         {

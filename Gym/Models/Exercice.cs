@@ -10,7 +10,7 @@ namespace Gym.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public int Coefficient { get; set; }
+        public double Coefficient { get; set; }
 
     }
 }
