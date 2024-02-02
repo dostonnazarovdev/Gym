@@ -16,5 +16,7 @@ namespace Gym
         public int Repetitions { get; set; }
         public double Weigth { get; set; }
 
+        public Status Status { get; set; }
+
     }
 }

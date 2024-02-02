@@ -1,6 +1,7 @@
 ﻿using Gym.Exception;
 using Gym.Models;
 
+
 namespace Gym
 {
     public class GymManagment
@@ -116,12 +117,24 @@ namespace Gym
 
         public void trainingStart(string nameAthlete, string nameExercise)
         {
-
+            foreach (var item in athleteExerciseList)
+            {
+                if(item.NameAthlete.Equals(nameAthlete) && item.NameExercise.Equals(nameExercise))
+                {
+                    item.Status = Status.STARTED;
+                }
+            }
         }
 
         public void trainingEnd(string nameAthlete, string nameExercise)
         {
-
+            foreach (var item in athleteExerciseList)
+            {
+                if (item.NameAthlete.Equals(nameAthlete) && item.NameExercise.Equals(nameExercise))
+                {
+                    item.Status = Status.ENDED;
+                }
+            }
         }
 
         public double caloriesBurnt(string nameAthlete)
