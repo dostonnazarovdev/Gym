@@ -144,20 +144,23 @@ namespace Gym
             {
                 if (item.Status!=null && item.Status.Equals(Status.ENDED) && item.NameAthlete.Equals(nameAthlete))
                 {
-                    Exercice exercice = getExerciseByName(item.NameExercise);
-                    Athlete athlete = getAthleteByName(item.NameAthlete);
-
-                    burntColories += (exercice.Coefficient * item.Series * item.Repetitions) * (athlete.Weight + item.Weigth);
-                    return burntColories;
+                    burntColories += item.getColoriesBurnt();
                 }
             }
-            return 0;
+            return burntColories;
         }
 
         public double caloriesTarget(string nameAthlete)
         {
-
-            return 0;
+            double burntColories = 0.0;
+            foreach (var item in athleteExerciseList)
+            {
+                if (item!=null && item.NameAthlete.Equals(nameAthlete))
+                {
+                    burntColories += item.getColoriesBurnt();
+                }
+            }
+            return burntColories;
         }
 
         public string score(string nameAthlete)

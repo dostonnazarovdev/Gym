@@ -1,4 +1,5 @@
-﻿using Gym.Models;
+﻿using Gym.Exception;
+using Gym.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace Gym
         public int Repetitions { get; set; }
         public double Weigth { get; set; }
         public Status Status { get; set; }
+        public Athlete Athlete { get; set; }
+        public Exercice Exercice { get; set; }
 
+
+        public double getColoriesBurnt()
+        {
+            return (Exercice.Coefficient * Series * Repetitions) * (Athlete.Weight + Weigth);
+        }
     }
 }
