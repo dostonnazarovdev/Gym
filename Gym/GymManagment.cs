@@ -1,6 +1,6 @@
 ﻿using Gym.Exception;
 using Gym.Models;
-
+using System.Runtime.InteropServices;
 
 namespace Gym
 {
@@ -95,7 +95,7 @@ namespace Gym
             Athlete athlete = getAthleteByName(nameAthlete);
             Exercice exercise = getExerciseByName(nameExercise);
 
-            if(athlete==null)
+            if (athlete == null)
             {
                 throw new NoAthlete("Where is Sportsman ???");
             }
@@ -119,7 +119,7 @@ namespace Gym
         {
             foreach (var item in athleteExerciseList)
             {
-                if(item.NameAthlete.Equals(nameAthlete) && item.NameExercise.Equals(nameExercise))
+                if (item.NameAthlete.Equals(nameAthlete) && item.NameExercise.Equals(nameExercise))
                 {
                     item.Status = Status.STARTED;
                 }
@@ -139,11 +139,24 @@ namespace Gym
 
         public double caloriesBurnt(string nameAthlete)
         {
+            double burntColories = 0.0;
+            foreach (var item in athleteExerciseList)
+            {
+                if (item.Status!=null && item.Status.Equals(Status.ENDED) && item.NameAthlete.Equals(nameAthlete))
+                {
+                    Exercice exercice = getExerciseByName(item.NameExercise);
+                    Athlete athlete = getAthleteByName(item.NameAthlete);
+
+                    burntColories += (exercice.Coefficient * item.Series * item.Repetitions) * (athlete.Weight + item.Weigth);
+                    return burntColories;
+                }
+            }
             return 0;
         }
 
         public double caloriesTarget(string nameAthlete)
         {
+
             return 0;
         }
 
