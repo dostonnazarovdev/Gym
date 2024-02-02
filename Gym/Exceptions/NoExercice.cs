@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gym
+namespace Gym.Exception
 {
-    public class NoExercice : Exception
+    public class NoExercice : NullReferenceException
     {
 
-        public NoExercice(string exercice) 
-            : base(exercice) 
-        {
-
+        public NoExercice(string name):base(name)
+        { 
         }
     }
 }

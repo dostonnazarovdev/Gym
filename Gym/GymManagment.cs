@@ -1,4 +1,5 @@
-﻿using Gym.Models;
+﻿using Gym.Exception;
+using Gym.Models;
 
 namespace Gym
 {
@@ -6,6 +7,8 @@ namespace Gym
     {
         private List<Athlete> athleteList = new List<Athlete>();
         private List<Exercice> exerciceList = new List<Exercice>();
+        private List<AthleteExercise> athleteExerciseList = new List<AthleteExercise>();
+
 
         public void addAthlete(string name, double weight)
         {
@@ -44,13 +47,13 @@ namespace Gym
                     return item.Name + " " + item.Weight;
                 }
             }
-            throw new NoAthlete("Sportsnam qani???");
+            throw new NoAthlete("Where is Sportsman ???");
         }
 
         public void addExercise(string name, double coefficient)
         {
             Exercice exist = getExerciseByName(name);
-            if(exist != null)
+            if (exist != null)
             {
                 Console.WriteLine("This Exercise already exist!!!");
             }
@@ -83,13 +86,32 @@ namespace Gym
                     return item.Name + " " + item.Coefficient;
                 }
             }
-            throw new NoExercice("Where is Exercise?");
+            throw new NoExercice("Where is Exercise ???");
         }
 
-        public void addExerciseToProgram(string nameAthlete, string nameExercise, int series,
-                                         int repetitions, double weight)
+        public void addExerciseToProgram(string nameAthlete, string nameExercise, int series, int repetitions, double weight)
         {
+            Athlete athlete = getAthleteByName(nameAthlete);
+            Exercice exercise = getExerciseByName(nameExercise);
 
+            if(athlete==null)
+            {
+                throw new NoAthlete("Where is Sportsman ???");
+            }
+            if (exercise == null)
+            {
+                throw new NoAthlete("Where is Exercise ???");
+            }
+            AthleteExercise athleteExercise = new AthleteExercise()
+            {
+                Id = Guid.NewGuid(),
+                NameAthlete = nameAthlete,
+                NameExercise = nameExercise,
+                Series = series,
+                Repetitions = repetitions,
+                Weigth = weight
+            };
+            athleteExerciseList.Add(athleteExercise);
         }
 
         public void trainingStart(string nameAthlete, string nameExercise)
