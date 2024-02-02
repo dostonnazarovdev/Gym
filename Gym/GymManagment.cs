@@ -186,7 +186,7 @@ namespace Gym
 
         public string worstExercise(string nameAthlete)
         {
-            double diff = 0.0;
+            double worseEx = 0.0;
 
             foreach (var athlete in athleteExerciseList)
             {
@@ -194,12 +194,13 @@ namespace Gym
                 if (athlete != null && athlete.NameAthlete.Equals(nameAthlete))
                 {
                   if(atColors)
-                    {
-                        diff = athlete.getColoriesBurnt();
+                    {    
+                        worseEx = athlete.getColoriesBurnt();
                         atColors = false;
-                    }else if (diff > athlete.getColoriesBurnt())
+                             
+                    }else if (worseEx > athlete.getColoriesBurnt())
                     {
-                        diff=athlete.getColoriesBurnt();
+                        worseEx =athlete.getColoriesBurnt();
                     }
                 }
             }
@@ -208,20 +209,52 @@ namespace Gym
 
         public string bestExercise(string nameAthlete)
         {
+            double bestEx = 0.0;
 
+            foreach (var athlete in athleteExerciseList)
+            {
+                bool atColors = true;
+                if (athlete != null && athlete.NameAthlete.Equals(nameAthlete))
+                {
+                    if (atColors)
+                    {
+                        bestEx = athlete.getColoriesBurnt();
+                        atColors = false;
+
+                    }
+                    else if (bestEx < athlete.getColoriesBurnt())
+                    {
+                         bestEx = athlete.getColoriesBurnt();
+                    }
+                }
+            }
             return null;
+          
         }
 
         public string exercisesByPerformance(string nameAthlete)
         {
+            foreach (var item in athleteExerciseList)
+            {
+                if(item!=null && item.NameAthlete.Equals(nameAthlete))
+                {
+                    return item.NameExercise + ", " + item.getColoriesBurnt();
+                }
+            }
             return null;
         }
 
         public string exercisesByExecutionOrder(string nameAthlete)
         {
-
+            foreach (var item in athleteExerciseList)
+            {
+                if (item != null && item.NameAthlete.Equals(nameAthlete))
+                {
+                    return item.Exercice.Name + ", ";
+                }
+            }
             return null;
+    
         }
     }
-}
 }
