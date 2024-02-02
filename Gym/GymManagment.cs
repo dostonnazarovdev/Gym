@@ -4,11 +4,13 @@ namespace Gym
 {
     public class GymManagment
     {
-        private List<Athlete> athleteList = new List<Athlete> ();
+        private List<Athlete> athleteList = new List<Athlete>();
+        private List<Exercice> exerciceList = new List<Exercice>();
+
         public void addAthlete(string name, double weight)
         {
-         var exist =  getAthleteByName(name);
-            if(exist!=null)
+            var exist = getAthleteByName(name);
+            if (exist != null)
             {
                 Console.WriteLine("Athlete already exists!");
             }
@@ -20,13 +22,12 @@ namespace Gym
             };
             athleteList.Add(athlete);
         }
-        
 
-        public Athlete getAthleteByName(string name) 
+        public Athlete getAthleteByName(string name)
         {
             foreach (var item in athleteList)
             {
-                if(item!=null && item.Name.Equals(name))
+                if (item != null && item.Name.Equals(name))
                 {
                     return item;
                 }
@@ -34,64 +35,94 @@ namespace Gym
             return null;
         }
 
-        public void addExercise(string name, double coefficient)
+        public string getAthlete(string name)
         {
-
+            foreach (var item in athleteList)
+            {
+                if (item.Name.Equals(name))
+                {
+                    return item.Name + " " + item.Weight;
+                }
+            }
+            throw new NoAthlete("Sportsnam qani???");
         }
 
-        public string getExercise(string name) 
+        public void addExercise(string name, double coefficient)
         {
-        return null;
+            Exercice exist = getExerciseByName(name);
+            if(exist != null)
+            {
+                Console.WriteLine("This Exercise already exist!!!");
+            }
+            Exercice exercice = new Exercice()
+            {
+                Id = Guid.NewGuid(),
+                Name = name,
+                Coefficient = coefficient
+            };
+        }
+
+        public Exercice getExerciseByName(string name)
+        {
+            foreach (var item in exerciceList)
+            {
+                if (item != null && item.Name.Equals(name))
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         public void addExerciseToProgram(string nameAthlete, string nameExercise, int series,
-                                         int repetitions, double weight)  {
+                                         int repetitions, double weight)
+        {
 
+        }
+
+        public void trainingStart(string nameAthlete, string nameExercise)
+        {
+
+        }
+
+        public void trainingEnd(string nameAthlete, string nameExercise)
+        {
+
+        }
+
+        public double caloriesBurnt(string nameAthlete)
+        {
+            return 0;
+        }
+
+        public double caloriesTarget(string nameAthlete)
+        {
+            return 0;
+        }
+
+        public string score(string nameAthlete)
+        {
+            return null;
+        }
+
+        public string worstExercise(string nameAthlete)
+        {
+            return null;
+        }
+
+        public string bestExercise(string nameAthlete)
+        {
+            return null;
+        }
+
+        public string exercisesByPerformance(string nameAthlete)
+        {
+            return null;
+        }
+
+        public string exercisesByExecutionOrder(string nameAthlete)
+        {
+            return null;
+        }
     }
-
-    public void trainingStart(string nameAthlete, string nameExercise)
-    {
-
-    }
-
-    public void trainingEnd(string nameAthlete, string nameExercise)
-    {
-
-    }
-
-    public double caloriesBurnt(string nameAthlete) 
-    {
-        return 0;
-    }
-
-    public double caloriesTarget(string nameAthlete)
-    {
-        return 0;
-    }
-
-    public string score(string nameAthlete)
-    {
-        return null;
-    }
-
-    public string worstExercise(string nameAthlete)
-    {
-        return null;
-    }
-
-    public string bestExercise(string nameAthlete)
-    {
-        return null;
-    }
-
-    public string exercisesByPerformance(string nameAthlete)
-    {
-        return null;
-    }
-
-    public string exercisesByExecutionOrder(string nameAthlete)
-    {
-        return null;
-    }
-}
 }
